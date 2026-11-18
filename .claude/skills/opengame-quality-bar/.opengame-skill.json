@@ -1,0 +1,22 @@
+{
+  "name": "opengame-quality-bar",
+  "digest": "929728d91af12eb936197b90a3b1eb22e9af5eb79046a29de1439edc658a5055",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "cfba3db0ad568f1bb78c3baf56e06de2cfa6b6e05278fea64a6b810d748bdece"
+    },
+    {
+      "path": "references/cheap-tells.md",
+      "sha256": "3dffc965c367a2c329ec2e32c72e3ea59d8afad5801e081d66ac015a950e5e39"
+    },
+    {
+      "path": "references/judges.md",
+      "sha256": "70e2707292d2c45f3d72db0fbbf5edf27573db0d33889ff5f9f92d210283b093"
+    },
+    {
+      "path": "references/review-prompt.md",
+      "sha256": "a1445e247d61b563648ee23ccdf4b24be4307039e7612b15b05abb5b06e96b3a"
+    }
+  ]
+}

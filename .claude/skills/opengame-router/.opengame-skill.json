@@ -1,0 +1,14 @@
+{
+  "name": "opengame-router",
+  "digest": "df839971a0c9fcd99303dd97864480b3f5e5832334d01676fe6d462eb8f7793b",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "86afd8aad697c13b13a37d0503d74693c605f93ec6480e502bf0423fd837ebff"
+    },
+    {
+      "path": "references/process.md",
+      "sha256": "a6f05ed2280c37bad58480aede468ed1ca8202f78707e5aadc4089d821fa09ee"
+    }
+  ]
+}

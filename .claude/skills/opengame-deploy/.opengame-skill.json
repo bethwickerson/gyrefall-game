@@ -1,0 +1,22 @@
+{
+  "name": "opengame-deploy",
+  "digest": "897d0335a6e184e08ac5e093d1b552a95890a39bee37994883fd8ca051733821",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "4f00094017c64776c8428adba117047ddae7bd02e2495734f4f3aa84796e0db6"
+    },
+    {
+      "path": "references/json-events.md",
+      "sha256": "de9fe8c7ed88ad39731117856492b47c22f57fb76d5b50958613bd24601d9258"
+    },
+    {
+      "path": "references/manifest.md",
+      "sha256": "c48230590f39a82b4d2583651e0e06119f397807a79b53bc6ec13ff0ecb268d0"
+    },
+    {
+      "path": "references/packaging.md",
+      "sha256": "20fb37b9a8d1bb2ae72e96c233d3df8cd4338e3d32c8ba8d923caf1280738431"
+    }
+  ]
+}
