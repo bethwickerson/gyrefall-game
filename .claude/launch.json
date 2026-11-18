@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "opengame-dev",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["opengame", "dev", ".", "--build", "--port", "4317"],
+      "port": 4317
+    },
+    {
+      "name": "vite",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["vite", "--port", "5173", "--strictPort"],
+      "port": 5173
+    }
+  ]
+}

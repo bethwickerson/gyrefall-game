@@ -1,0 +1,48 @@
+{
+  "$schema": "https://opengame.io/schema/opengame.json",
+  "title": "Gyrefall",
+  "tagline": "auto",
+  "description": "auto",
+  "genre": "shooter-survival",
+  "kind": "game",
+  "build": {
+    "command": "npm run build",
+    "output": "dist"
+  },
+  "controls": ["keyboard", "mouse"],
+  "players": "single",
+  "leaderboards": [
+    {
+      "key": "matches",
+      "label": "Matches",
+      "order": "desc",
+      "keep": "runs",
+      "runsPerPlayer": 20,
+      "min": 0,
+      "max": 5000,
+      "scoreLabel": "XP",
+      "format": "integer",
+      "columns": [
+        { "key": "kills", "label": "Takedowns", "format": "integer", "min": 0, "max": 9 },
+        { "key": "placement", "label": "Place", "format": "integer", "order": "asc", "min": 1, "max": 10 },
+        { "key": "damage", "label": "Damage", "format": "integer", "min": 0, "max": 5000 }
+      ]
+    },
+    {
+      "key": "career",
+      "label": "Career",
+      "order": "desc",
+      "keep": "career",
+      "from": "matches",
+      "scoreAgg": "sum",
+      "scoreLabel": "XP",
+      "format": "integer",
+      "columns": [
+        { "key": "played", "label": "Matches", "format": "integer", "agg": "count" },
+        { "key": "wins", "label": "Wins", "format": "integer", "agg": "count", "where": { "of": "placement", "op": "eq", "value": 1 } },
+        { "key": "kills", "label": "Takedowns", "format": "integer", "agg": "sum", "of": "kills" }
+      ]
+    }
+  ],
+  "sdk": "^0.5"
+}

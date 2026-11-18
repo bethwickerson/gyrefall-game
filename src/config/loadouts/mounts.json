@@ -1,0 +1,9 @@
+[
+  {
+    "id": "gyrehawk",
+    "name": "Gyrehawk",
+    "blurb": "Balanced glider. The baseline every other mount is measured against.",
+    "model": "mount.gyrehawk",
+    "stats": { "healthBase": 100, "speedMul": 1, "turnMul": 1, "diveMul": 1, "staminaMul": 1 }
+  }
+]

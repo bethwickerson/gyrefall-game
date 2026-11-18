@@ -1,0 +1,6 @@
+{
+  "mount.gyrehawk": { "placeholder": "mount", "glb": null },
+  "rider.warden": { "placeholder": "rider", "glb": null },
+  "armor.bonemail": { "placeholder": "armor", "glb": null },
+  "pickup.shard": { "placeholder": "shard", "glb": null }
+}

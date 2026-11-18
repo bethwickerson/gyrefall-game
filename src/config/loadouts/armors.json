@@ -1,0 +1,10 @@
+[
+  {
+    "id": "bonemail",
+    "name": "Bonemail",
+    "blurb": "Plain rib plating. Changes the mount only, never the rider.",
+    "model": "armor.bonemail",
+    "tint": "#d8d2c0",
+    "stats": { "healthMul": 1, "dragMul": 1, "damageTakenMul": 1 }
+  }
+]

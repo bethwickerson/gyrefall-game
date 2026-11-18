@@ -1,0 +1,10 @@
+[
+  {
+    "id": "rift-warden",
+    "name": "Rift Warden",
+    "blurb": "No special yet. Specials plug in through the rider's special id.",
+    "model": "rider.warden",
+    "special": "none",
+    "stats": { "strikeMul": 1, "flareWindowMul": 1 }
+  }
+]
