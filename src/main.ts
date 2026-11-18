@@ -143,6 +143,9 @@ const boot = async (): Promise<void> => {
     void platform.submitMatch(r);
   };
 
+  // Console handle for tuning and automated checks. Holds no player data.
+  (window as unknown as Record<string, unknown>).__gyrefall = { world, match, tuning, view };
+
   let framesDrawn = 0;
   let readySent = false;
   const loop = new FixedLoop(

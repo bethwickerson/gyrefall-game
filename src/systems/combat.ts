@@ -1,6 +1,6 @@
 import { Vector3 } from "three";
 import { tuning } from "../config/tuning";
-import { forwardFrom } from "../core/math";
+import { clamp, forwardFrom, pitchOf, wrapAngle, yawOf } from "../core/math";
 import type { Flyer } from "../world/flyer";
 import type { World } from "../world/world";
 
@@ -88,4 +88,41 @@ const resolveHit = (world: World, a: Flyer, b: Flyer, closing: number): void => 
   a.diveStartY = a.pos.y;
 
   world.events.emit("strike", { attacker: a.id, defender: b.id, damage, clean, closing, drop });
+};
+
+const aFwd = new Vector3();
+const lead = new Vector3();
+
+/**
+ * Dive aim assist for every flyer. While diving, if a target sits inside a
+ * narrow cone ahead, the nose is eased onto its lead point. Set assistRate to
+ * zero to turn it off.
+ */
+export const stepStrikeAssist = (world: World, dt: number): void => {
+  const c = tuning.combat;
+  if (c.assistRate <= 0) return;
+  const cosCone = Math.cos(c.assistCone);
+  for (const a of world.flyers) {
+    if (!a.alive || !a.diving || a.strikeCooldown > 0) continue;
+    forwardFrom(aFwd, a.yaw, a.pitch);
+    let best: Flyer | null = null;
+    let bestDot = cosCone;
+    for (const b of world.flyers) {
+      if (b === a || !b.alive) continue;
+      toB.subVectors(b.pos, a.pos);
+      const dist = toB.length();
+      if (dist > c.assistRange || dist < 1) continue;
+      const dot = toB.dot(aFwd) / dist;
+      if (dot > bestDot) {
+        bestDot = dot;
+        best = b;
+      }
+    }
+    if (!best) continue;
+    const dist = a.pos.distanceTo(best.pos);
+    lead.copy(best.pos).addScaledVector(best.vel, dist / Math.max(a.speed, 30)).sub(a.pos);
+    const maxStep = c.assistRate * dt;
+    a.yaw += clamp(wrapAngle(yawOf(lead) - a.yaw), -maxStep, maxStep);
+    a.pitch += clamp(pitchOf(lead) - a.pitch, -maxStep, maxStep);
+  }
 };

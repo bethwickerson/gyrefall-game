@@ -14,6 +14,10 @@ class Platform {
   private muteHandlers: Handler<boolean>[] = [];
   private nameHandlers: Handler<string | null>[] = [];
   private started: Promise<void> | null = null;
+  // Last value of each stream, replayed to listeners that register late.
+  private lastPause: boolean | undefined;
+  private lastMute: boolean | undefined;
+  private lastHandle: string | null | undefined;
   private readySent = false;
 
   /** Start the SDK. Pass the manifest because Vite does not copy opengame.json into dist. */
@@ -25,9 +29,18 @@ class Platform {
         console.warn("OpenGame SDK init failed. Continuing offline.", err);
       }
       // Each listener is called at once with the current state, then on every change.
-      og.onPause((paused) => this.pauseHandlers.forEach((h) => h(paused)));
-      og.audio.onHostMute((muted) => this.muteHandlers.forEach((h) => h(muted)));
-      og.player.onChange((player) => this.nameHandlers.forEach((h) => h(player.handle)));
+      og.onPause((paused) => {
+        this.lastPause = paused;
+        this.pauseHandlers.forEach((h) => h(paused));
+      });
+      og.audio.onHostMute((muted) => {
+        this.lastMute = muted;
+        this.muteHandlers.forEach((h) => h(muted));
+      });
+      og.player.onChange((player) => {
+        this.lastHandle = player.handle;
+        this.nameHandlers.forEach((h) => h(player.handle));
+      });
     })();
     return this.started;
   }
@@ -41,15 +54,18 @@ class Platform {
 
   onPause(h: Handler<boolean>): void {
     this.pauseHandlers.push(h);
+    if (this.lastPause !== undefined) h(this.lastPause);
   }
 
   onHostMute(h: Handler<boolean>): void {
     this.muteHandlers.push(h);
+    if (this.lastMute !== undefined) h(this.lastMute);
   }
 
   /** The player's OpenGame handle, or null for a guest, a preview or outside OpenGame. */
   onHandle(h: Handler<string | null>): void {
     this.nameHandlers.push(h);
+    if (this.lastHandle !== undefined) h(this.lastHandle);
   }
 
   /** Must be called from a click or a key press. The page enters fullscreen for the frame. */

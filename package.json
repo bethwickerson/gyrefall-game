@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "sim": "vite build --ssr scripts/sim.ts --outDir .sim --logLevel warn && node .sim/sim.js"
   },
   "dependencies": {
     "@opengamehq/sdk": "^0.5.1",
@@ -15,6 +16,7 @@
   },
   "devDependencies": {
     "@opengamehq/cli": "^0.13.2",
+    "@types/node": "^26.6.6",
     "@types/three": "^0.187.0",
     "typescript": "^7.0.2",
     "vite": "^8.3.8"

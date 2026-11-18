@@ -13,8 +13,8 @@ import { ChaseCamera } from "./camera";
 
 const PALETTE = {
   sky: 0x9aa3a8,
-  stone: 0x2b2f36,
-  stoneLight: 0x3b4048,
+  stone: 0x3c4149,
+  stoneLight: 0x5a606a,
   bone: 0xd8d2c0,
   moss: 0x4d5c3c,
   bark: 0x5b4636,
@@ -51,7 +51,7 @@ export class View {
   constructor(readonly canvas: HTMLCanvasElement) {
     this.renderer = new WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" });
     this.renderer.setClearColor(PALETTE.sky);
-    this.scene.fog = new FogExp2(PALETTE.sky, 0.0016);
+    this.scene.fog = new FogExp2(PALETTE.sky, 0.0011);
     this.chase = new ChaseCamera(this.camera);
     this.scene.add(this.flyerLayer);
     this.resize();
@@ -63,7 +63,9 @@ export class View {
   resize(): void {
     const w = Math.max(1, window.innerWidth);
     const h = Math.max(1, window.innerHeight);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    // Cap the drawing buffer near 1440p worth of pixels so high density and ultrawide screens hold frame rate.
+    const budget = Math.sqrt((2560 * 1440) / (w * h));
+    this.renderer.setPixelRatio(Math.max(1, Math.min(window.devicePixelRatio || 1, 2, budget)));
     this.renderer.setSize(w, h, false);
     this.camera.aspect = w / h;
     this.camera.updateProjectionMatrix();
@@ -72,7 +74,7 @@ export class View {
   loadArena(arena: Arena, assets: AssetManager): void {
     this.assets = assets;
     const s = this.scene;
-    s.add(new HemisphereLight(0xcfd8dc, 0x1c1f24, 1.15));
+    s.add(new HemisphereLight(0xdfe6ea, 0x2a2e35, 1.6));
     s.add(new AmbientLight(0xffffff, 0.25));
     const sun = new DirectionalLight(0xfff1dc, 1.6);
     sun.position.set(0.4, 1, 0.25);

@@ -18,15 +18,15 @@ export const tuning = {
     pitchRate: 1.3,
     maxPitchUp: 1.0,
     maxPitchDown: 1.2,
-    diveAngle: 1.05, // nose down angle with the mouse centred
-    diveSteerRange: 0.6, // how far the mouse can shallow or steepen a dive
+    diveAngle: 0.85, // nose down angle with the mouse centred
+    diveSteerRange: 0.85, // how far the mouse can shallow or steepen a dive
     divePitchRate: 2.6,
     glideSink: 1.6, // constant sink while gliding
     stallSink: 14,
     stallDroop: 0.9,
     liftDecay: 2.2, // how fast flap and flare lift fades
     flapThrust: 7,
-    flapLift: 9,
+    flapLift: 11,
     flapCost: 18,
     flapInterval: 0.45,
     staminaMax: 100,
@@ -35,9 +35,9 @@ export const tuning = {
     flareDuration: 0.55,
     flareWindow: 0.35, // dodge window at the start of a flare
     flareCooldown: 1.6,
-    flareBrake: 2.6, // exponential speed loss per second while flaring
+    flareBrake: 1.5, // exponential speed loss per second while flaring
     flareLift: 7,
-    flarePitchKick: 1.2,
+    flarePitchKick: 0.7,
     maxBank: 0.95,
     bankRate: 6,
     wallSpeedKeep: 0.55,
@@ -62,12 +62,12 @@ export const tuning = {
     fovRate: 4,
   },
   combat: {
-    strikeRadius: 6.5,
-    minClosingSpeed: 18,
-    baseDamage: 8,
-    speedDamage: 0.5, // damage per m/s of closing speed
-    heightDamage: 0.25, // damage per metre dropped in the dive
-    glancingMul: 0.4,
+    strikeRadius: 7,
+    minClosingSpeed: 16,
+    baseDamage: 10,
+    speedDamage: 0.6, // damage per m/s of closing speed
+    heightDamage: 0.3, // damage per metre dropped in the dive
+    glancingMul: 0.45,
     cleanAboveDot: 0.45, // how steeply from above counts as clean
     cleanBehindDot: 0.5, // how squarely from behind counts as clean
     strikeCooldown: 1.2,
@@ -83,6 +83,9 @@ export const tuning = {
     missDiveLock: 0.9,
     dodgeBoost: 8,
     dodgeLift: 6,
+    assistRange: 70, // dive aim assist: how far ahead it looks
+    assistCone: 0.3, // half angle in radians a target must be inside
+    assistRate: 1.1, // radians per second the nose is pulled onto the target
   },
   shards: {
     dropBase: 2,
@@ -115,7 +118,10 @@ export const tuning = {
     aimLead: 1,
     climbAdvantage: 70, // height a bot tries to hold over the band centre
     attackRange: 190,
-    minAdvantage: 18, // height over a target needed to commit
+    minAdvantage: 14,
+    commitSlope: 2, // flattest line a bot will dive along, as flat distance per metre of height
+    diveDescent: 24, // descent rate bots assume when planning a dive
+    diveReach: 36, // flat speed bots assume when planning a dive // height over a target needed to commit
     playerBias: 0.85, // below 1 makes the player a preferred target
   },
 };

@@ -5,7 +5,7 @@ import { makeRng } from "../core/math";
 import { Flyer } from "../world/flyer";
 import type { World } from "../world/world";
 import { makeBrain, stepBot, type BotBrain } from "./ai";
-import { stepCombat } from "./combat";
+import { stepCombat, stepStrikeAssist } from "./combat";
 import { stepFlight } from "./flight";
 import type { Input } from "./input";
 import { stepZone } from "./zone";
@@ -127,6 +127,7 @@ export class Match {
       }
       stepFlight(w, f, dt);
     }
+    stepStrikeAssist(w, dt);
     stepCombat(w);
     stepZone(w, dt);
     this.stepShards(dt);
